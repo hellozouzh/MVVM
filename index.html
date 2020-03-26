@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id="app">
+    <h3>{{ info.title }}</h3>
+    <hr>
+    <div>
+      <div>Price: ￥{{ price }}</div>
+      <div>Num: {{ num }}</div>
+    </div>
+    <hr>
+    <div>Total: ￥{{ total }}</div>
+    <div>Taxes: ￥{{ taxes }}</div>
+    <hr>
+    购买数量: <input v-model="num" placeholder="购买数量"/>
+  </div>
+  <script src="./mvvm/mvvm.js"></script>
+  <script>
+    let vm = new Mvvm({
+      el: '#app',
+      data: {
+        price: '5.00',
+        num: 3,
+        info: {
+          title: 'Vue2.x 响应式原理'
+        }
+      },
+      computed: {
+        total() {
+          return (this.price * this.num).toFixed(2)
+        },
+        taxes: {
+          get() {
+            return (this.total * 0.03).toFixed(2)
+          }
+        }
+      }
+    })
+  </script>
+</body>
+</html>
